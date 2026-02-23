@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 
-import { Container } from "@mui/material";
+import { Box } from "@mui/material";
 
 import Footer from "./components/Footer";
 import Header from "./components/Header";
@@ -9,13 +9,20 @@ import Header from "./components/Header";
 function App() {
 
   return (
-    <>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh',
+      }}
+    >
       <Header />
-      <Container>
+
+      <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
         <Outlet />
-      </Container>
+      </Box>
       <Footer />
-    </>
+    </Box>
   );
 }
 

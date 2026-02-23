@@ -8,17 +8,22 @@ const HomeScreen = () => {
     return (
         <>
             <Typography variant="h4" component="h1" gutterBottom sx={{ mb: 4 }}>
-                Latest Products
+            Latest Products
             </Typography>
-            <Box sx={{ width: '100%' }}>
-            <Grid container spacing={3}>
+            <Grid 
+                container 
+                spacing={2}
+                sx={{ 
+                    px: { xs: 0.5, sm: 1, md: 1.5 }, 
+                    width: '100%'
+                }}
+                >
                 {products.map((product) => (
-                <Grid item key={product._id} xs={12} sm={6} md={4} xl={3}>
-                    <Product product={product}/>
-                </Grid>
+                    <Grid item xs={12} sm={6} md={4} lg={4} xl={3} key={product._id}>
+                    <Product product={product} />
+                    </Grid>
                 ))}
             </Grid>
-            </Box>
         </>
     );
 };

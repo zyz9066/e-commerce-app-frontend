@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import { AppBar, Badge, Box, IconButton, Toolbar, Typography } from "@mui/material";
 import { AccountCircle, Mail, Menu, MoreVert, Notifications, Search, ShoppingCart } from "@mui/icons-material";
 
@@ -18,7 +20,7 @@ const Header = () => {
                 <Typography
                     variant="h6"
                     to="/"
-                    component="div"
+                    component={Link}
                     sx={{ flexGrow: 1 }}
                 >
                     E-commerce App
@@ -47,6 +49,7 @@ const Header = () => {
                     </Badge>
                 </IconButton>
                 <IconButton
+                    component={Link}
                     size="large"
                     edge="end"
                     aria-label="cart"
@@ -58,6 +61,7 @@ const Header = () => {
                     </Badge>
                 </IconButton>
                 <IconButton
+                    component={Link}
                     size="large"
                     edge="end"
                     aria-label="account"
@@ -68,7 +72,7 @@ const Header = () => {
                 </IconButton>
                 <IconButton
                     size="large"
-                    aria-label="display more actions"
+                    aria-label="more"
                     edge="end"
                     color="inherit"
                 >

@@ -1,62 +1,97 @@
 import { Link } from "react-router-dom";
-import { Card, CardMedia, CardContent, Typography, CardActions, Box } from "@mui/material";
+
+import { Card, CardMedia, Typography, CardActions, Box } from "@mui/material";
+
+import RatingComponent from "./Rating";
   
-  const Product = ({ product }) => {
-    return (
-      <Card
+const Product = ({ product }) => {
+  return (
+    <Card sx={{
+      height: '100%',  // Fills Grid item
+      display: 'flex',
+      flexDirection: 'column',
+      p: 1.5,  // Reduced from 2
+      boxSizing: 'border-box',
+      borderRadius: 1,
+      '&:hover': {
+        boxShadow: 4,
+        transform: 'translateY(-2px)',
+      },
+    }}>
+      <CardMedia
+        component="div"
         sx={{
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          p: 2,
-          '&:hover': {
-            boxShadow: 6,
-            transform: 'translateY(-4px)',
-            transition: 'all 0.3s ease-in-out',
+          height: 200,
+          position: 'relative',
+          borderRadius: 0.75,
+          overflow: 'hidden',
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundImage: `url(${product.image})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
           },
         }}
       >
-        <CardMedia
+        <Link
           to={`/product/${product._id}`}
-          sx={{
-            height: 240,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            borderRadius: 1,
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 1,
+            cursor: 'pointer',
           }}
-          image={product.image}
+        />
+      </CardMedia>
+      
+      <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', pt: 1 }}>
+      <Typography
+        component={Link}
+        to={`/product/${product._id}`}
+        variant="subtitle1"
+        title={product.name}
+        sx={{
+          fontWeight: 600,
+          color: 'text.primary',
+          textDecoration: 'none',
+          '&:hover': { color: 'primary.main' },
+          mb: 1,
+          height: 24,
+          width: 140,
+          whiteSpace: 'nowrap',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          maxWidth: '100%',
+        }}
+      >
+        {product.name}
+      </Typography>
+        
+        <RatingComponent
+          value={product.rating}
+          text={`${product.numReviews} reviews`}
+          color="#f8e825"
         />
         
-        <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-          <CardContent sx={{ flexGrow: 1, p: 0, pt: 1 }}>
-            <Typography
-              gutterBottom
-              variant="h6"
-              to={`/product/${product._id}`}
-              sx={{
-                fontWeight: 600,
-                color: 'text.primary',
-                textDecoration: 'none',
-                '&:hover': { color: 'primary.main' },
-                mb: 1,
-              }}
-            >
-              {product.name}
-            </Typography>
-          </CardContent>
-          
-          <CardActions sx={{ p: 0, mt: 'auto' }}>
-            <Typography
-              variant="h5"
-              color="text.secondary"
-              sx={{ fontWeight: 700, color: 'text.primary' }}
-            >
-              ${product.price}
-            </Typography>
-          </CardActions>
-        </Box>
-      </Card>
-    );
-  };
+        <CardActions sx={{ p: 0, mt: 'auto' }}>
+          <Typography
+            variant="h5"
+            sx={{ fontWeight: 700, color: 'text.primary' }}
+          >
+            ${product.price}
+          </Typography>
+        </CardActions>
+      </Box>
+    </Card>
+  );
+};
   
   export default Product;
