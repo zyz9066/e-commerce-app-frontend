@@ -1,4 +1,7 @@
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+
+import axios from "axios";
 
 import { Box, Button, Chip, Divider, IconButton, Paper, Typography } from "@mui/material";
 
@@ -6,11 +9,20 @@ import { ArrowBack } from "@mui/icons-material";
 
 import RatingComponent from "../components/Rating";
 
-import products from "../products";
 
 const ProductScreen = () => {
+    const [product, setProduct] = useState([]);
+
     const { id: productId } = useParams();
-    const product = products.find((p) => p._id === productId);
+
+    useEffect(() => {
+        const fetchProduct = async () => {
+            const { data } = await axios.get(`https://ecommerceappbackend-fapo--5000--d7bdb599.local-credentialless.webcontainer.io/api/products/${productId}`);
+            setProduct(data);
+        };
+
+        fetchProduct();
+    }, []);
 
     return (
         <Box sx={{ 

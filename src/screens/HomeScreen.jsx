@@ -1,14 +1,28 @@
+import { useEffect, useState } from 'react';
+
+import axios from 'axios';
+
 import { Box, Grid, Typography } from '@mui/material';
 
 import Product from '../components/Product';
-import products from "../products";
+
 
 const HomeScreen = () => {
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            const { data } = await axios.get('https://ecommerceappbackend-fapo--5000--d7bdb599.local-credentialless.webcontainer.io/api/products');
+            setProducts(data);
+        };
+
+        fetchProducts();
+    }, []);
   
     return (
         <>
             <Typography variant="h4" component="h1" gutterBottom sx={{ mb: 4 }}>
-            Latest Products
+                Latest Products
             </Typography>
             <Grid 
                 container 
